@@ -39,9 +39,9 @@ router.get('/productos/:id', (req, res) => {
 
 router.post('/productos/guardar/',(req, res)=>{
     try {
-        //res.send(objProductos.guardarProd(req.body));
         objProductos.guardarProd(req.body);
         //res.redirect('/');
+        res.send(req.body);
     } catch (error) {
         res.status(500).send(error.message);
     }

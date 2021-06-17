@@ -18,29 +18,25 @@
             <br>
 
             <form autocomplete="off">
-                <!-- Campo nombre del producto -->
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input id="nombre" class="form-control" type="text" name="title" required>
+                    <input id="nombre" class="form-control" type="text" name="title" required placeholder="El producto">
                 </div>
 
-                <!-- Campo precio del producto -->
                 <div class="form-group">
                     <label for="precio">Precio</label>
-                    <input id="precio" class="form-control" type="number" step="0.5" name="price" required>
+                    <input id="precio" class="form-control" type="number" name="price" required placeholder="El precio">  
                 </div>
 
-                <!-- Campo url de la foto del producto -->
                 <div class="form-group">
                     <label for="foto">Foto URL</label>
-                    <input id="foto" class="form-control" type="url" name="thumbnail">
+                    <input id="foto" class="form-control" type="url" name="thumbnail" placeholder="La imagen">
                 </div>
 
-                <!-- Botón de envío -->
-                <button class="btn btn-success mt-3">Enviar</button>
+                <button class="btn btn-success mt-3">Grabar</button>
             </form>
             <hr>
-            <button class="btn btn-info mt-3" onclick="location.href = '/api/productos/vista'">Vista handlebars productos</button>
+            <button class="btn btn-info mt-3" onclick="location.href = '/api/productos/vista'">Vista Productos (hbs)</button>
             <br>
             <br>
             <div id="datos"></div>

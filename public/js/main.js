@@ -2,8 +2,6 @@ const socket = io.connect();
 
 /* si recibo productos, los muestro usando handlebars */
 socket.on('productos', function (productos) {
-    /*console.log('productos socket client')
-    alert('recibo productos')*/
     document.getElementById('datos').innerHTML = data2TableHBS(productos)
 });
 
@@ -12,7 +10,11 @@ const form = document.querySelector('form');
 
 form.addEventListener('submit', event => {
     event.preventDefault();
-    const data = { title: form[0].value, price: form[1].value, thumbnail: form[2].value };
+    const data = { 
+        title:      form[0].value, 
+        price:      form[1].value, 
+        thumbnail:  form[2].value 
+    };
 
     fetch('/api/productos/guardar', {
         headers: {
@@ -23,7 +25,6 @@ form.addEventListener('submit', event => {
     })
     .then(respuesta => respuesta.json())
     .then(productos => {
-        alert('En el ultimo then') ///Nunca llega acá ???
         form.reset();
         socket.emit('update', 'ok');
     })
@@ -60,8 +61,7 @@ function data2TableHBS(productos) {
         </div>
         {{/if}}
     `
-
-    console.log(productos);
+    //console.log(productos);
     var template = Handlebars.compile(plantilla);
     let html = template({ productos: productos, hayProductos: productos.length });
     return html;
