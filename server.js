@@ -3,6 +3,8 @@ const app = express();
 const handlebars = require('express-handlebars');
 const http = require('http').Server(app);
 const productos = require('./api/productos');
+const chat = require('./api/chat');
+
 
 // le pasamos la constante http a socket.io
 const io = require('socket.io')(http);
@@ -22,10 +24,11 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", __dirname + '/views');
 
-let messages = [
+/* let messages = [
     {email: "rleivat@gmail.com", mensaje: "Primer mensaje"},
     {email: "robleitob@gmail.com", mensaje: "Segundo mensaje"},
 ]; //Uso provisorio, debe ir en chat.js
+ */
 
 io.on('connection', async socket => {
     console.log('Actualizacion detectada!');
@@ -35,13 +38,13 @@ io.on('connection', async socket => {
 
     //TODOS para Chat
     //Envio los mensajes al cliente recien conectado (debo referenciar al arreglo de chat.js (clase))
-    socket.emit('messages', messages);
+    socket.emit('messages', chat.leerMsje());
 
     /*Escuchando al cliente*/
     socket.on('nuevo-mensaje', mensaje => {
-        //console.log('En nuevo-mensaje');
-        messages.push(mensaje);
-        io.sockets.emit('messages', messages);
+        io.sockets.emit('messages', chat.guardarMsje(mensaje));
+        //chat.messages.push(mensaje);
+        //io.sockets.emit('messages', chat.messages);
     });
 
     /* Escucho los mensajes enviado por el cliente y se los propago a todos;
