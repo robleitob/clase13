@@ -8,24 +8,21 @@ class Chat{
     leerMsje(){
         try {
             //Lectura de archivo
-            
-            /* let contenidoArchivo =  fs.readFileSync('../assets/mensajes.txt', 'utf-8')
-            this.messages = JSON.parse(contenidoArchivo); */
-
-            /* Este es el error al usar las lineas de arriba : A ocurrido un error con el archivo: ENOENT: no such file or directory, open '../assets/mensajes.txt' */
-            
-            return this.messages;
+            let contenidoArchivo =  fs.readFileSync('./assets/mensajes.txt', 'utf-8')
+            if(contenidoArchivo.length > 0){
+                this.messages = JSON.parse(contenidoArchivo);
+            }
+            return this.messages;            
          } catch (error) {
             //console.log(error);
-            this.messages =[{}];
              console.log('A ocurrido un error con el archivo: '+ error.message);
-             //console.log('No hay mensajes que mostrar');
          }
     }
 
     guardarMsje(obj){
         try {
             this.messages.push(obj);
+            fs.writeFileSync('./assets/mensajes.txt', JSON.stringify(this.messages, null, '\t'));
             return this.messages;    
         } catch (error) {
             return [{

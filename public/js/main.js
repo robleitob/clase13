@@ -7,18 +7,15 @@ socket.on('productos', function (productos) {
 
 //Muestro todos los mensajes del chat al usuario que se conecta
 socket.on('messages', messages => {
-    //document.getElementById('chat').innerHTML = messages;
-    //console.log(messages);
     render(messages);
 });
 
 function render(messages) {
     let html = messages.map(elem => {
-        return (`<div>
-                <strong>${elem.email}</strong>:
-                <em>${elem.mensaje}</em></div>`)
+        return (`<strong>${elem.email}</strong><sup>[${elem.fecha}]:</sup>
+                <em>${elem.mensaje}</em><br>`)
     }).join(' ');
-    document.getElementById('chat').innerHTML = html;
+    document.getElementById('chat').innerHTML = `<div id="msjes"><h3>Centro de Mensajes</h3><hr>${html}</div>`;
 }
 
 socket.on('messages', function(messages) {render(messages);});
@@ -27,6 +24,7 @@ function addMessage(event){
     
     let message = {
         email: document.getElementById('email').value,
+        fecha: new Date().toLocaleString(),
         mensaje: document.getElementById('mensaje').value
     }
     

@@ -5,7 +5,6 @@ const http = require('http').Server(app);
 const productos = require('./api/productos');
 const chat = require('./api/chat');
 
-
 // le pasamos la constante http a socket.io
 const io = require('socket.io')(http);
 
