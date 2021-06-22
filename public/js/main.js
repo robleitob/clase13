@@ -5,6 +5,36 @@ socket.on('productos', function (productos) {
     document.getElementById('datos').innerHTML = data2TableHBS(productos)
 });
 
+//Muestro todos los mensajes del chat al usuario que se conecta
+socket.on('messages', messages => {
+    //document.getElementById('chat').innerHTML = messages;
+    //console.log(messages);
+    render(messages);
+});
+
+function render(messages) {
+    let html = messages.map(elem => {
+        return (`<div>
+                <strong>${elem.email}</strong>:
+                <em>${elem.mensaje}</em></div>`)
+    }).join(' ');
+    document.getElementById('chat').innerHTML = html;
+}
+
+socket.on('messages', function(messages) {render(messages);});
+
+function addMessage(event){
+    
+    let message = {
+        email: document.getElementById('email').value,
+        mensaje: document.getElementById('mensaje').value
+    }
+    
+    socket.emit('nuevo-mensaje', message);
+    return false;
+}
+
+
 /* obtengo el formulario */
 const form = document.querySelector('form');
 
@@ -65,4 +95,8 @@ function data2TableHBS(productos) {
     var template = Handlebars.compile(plantilla);
     let html = template({ productos: productos, hayProductos: productos.length });
     return html;
+}
+
+function data2ChatHBS(messages){
+
 }
