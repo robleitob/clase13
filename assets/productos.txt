@@ -1,0 +1,8 @@
+[
+	{
+		"title": "Calculadora",
+		"price": "5",
+		"thumbnail": "https://cdn3.iconfinder.com/data/icons/e-commerce-and-online-shopping/64/__Calculator-256.png",
+		"id": 0
+	}
+]

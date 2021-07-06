@@ -1,4 +1,4 @@
-//const fs = require('fs');
+const fs = require('fs');
 
 class Productos{
     constructor(){
@@ -23,6 +23,7 @@ class Productos{
             //const largo = this.productos.length;
             //this.productos.push({...obj,id:largo+1});
             this.productos.push({...obj,id:this.id++});
+            fs.writeFileSync('./assets/productos.txt', JSON.stringify(this.productos, null, '\t'));
             return this.productos;    
         } catch (error) {
             return [{
